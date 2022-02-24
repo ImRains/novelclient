@@ -8,7 +8,7 @@
         input-background="#fff"
         placeholder="支持搜索书名、作者哦 ~">
         <template v-slot:rightout>
-            <nut-icon name="search" color="#ccc" @click="searchNovels"></nut-icon>
+            <nut-icon name="search" color="#fff" @click="searchNovels"></nut-icon>
         </template>
     </nut-searchbar>
     <search-list :novelList="searchList" v-show="searchList.length > 0"></search-list>

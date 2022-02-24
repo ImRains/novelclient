@@ -1,16 +1,10 @@
 <template>
-    <nut-navbar
-      :left-show="false"
-      @on-click-send="searchBook"
-      icon="search"
-      class="shopNavbar fixedTop"
-    >
-      <template #content>
-        <nut-tabs v-model="tabValue" @click="changeTab" background="transparent">
-          <nut-tabpane title="我的书架"></nut-tabpane>
-        </nut-tabs>
-      </template>
-    </nut-navbar>
+    <div class="shopNavbar fixedTop">
+      <p>我的书架</p>
+      <div>
+        <nut-icon name="search" color="#fff"></nut-icon>
+      </div>
+    </div>
     <div v-show="tabValue == 0">
       书架列表
     </div>
@@ -42,10 +36,23 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .shopNavbar{
         background: linear-gradient(90deg, #4F5D50 0%, #687B69);
         height: 50px;
+        line-height: 50px;
+        position: relative;
+        p{
+          text-align: center;
+          font-size: 18px;
+          font-weight: bold;
+          color: #fff;
+        }
+        div{
+          position: absolute;
+          right: 16px;
+          top:5px;
+        }
     }
 
     .fixedTop{

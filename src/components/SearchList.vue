@@ -1,14 +1,6 @@
 <template>
   <ul class="novelList">
     <li v-for="(item, index) in novelList" :key="index">
-      <!-- <div class="novelCover">
-                <img :src="normalImage">
-            </div>
-            <div class="novelMsg">
-                <p>{{item.novelName}}</p>
-                <p>{{item.author}}</p>
-                <p>{{item.date}}{{item.newChapter}}</p>
-            </div> -->
       <nut-skeleton
         width="250px"
         height="15px"

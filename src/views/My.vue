@@ -1,16 +1,10 @@
 <template>
-    <nut-navbar
-      :left-show="false"
-      @on-click-send="setting"
-      icon="setting"
-      class="settingNavbar fixedTop"
-    >
-      <template #content>
-        <nut-tabs v-model="tabValue" @click="changeTab" background="transparent">
-          <nut-tabpane title="个人信息"></nut-tabpane>
-        </nut-tabs>
-      </template>
-    </nut-navbar>
+    <div class="settingNavbar fixedTop">
+      <p>个人信息</p>
+      <div>
+        <nut-icon name="setting" color="#fff"></nut-icon>
+      </div>
+    </div>
     <div v-show="tabValue == 0">
       个人信息
     </div>
@@ -42,10 +36,23 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .settingNavbar{
         background: linear-gradient(90deg, #4F5D50 0%, #687B69);
         height: 50px;
+        line-height: 50px;
+        position: relative;
+        p{
+          text-align: center;
+          font-size: 18px;
+          font-weight: bold;
+          color: #fff;
+        }
+        div{
+          position: absolute;
+          right: 16px;
+          top:5px;
+        }
     }
     .fixedTop{
         position: fixed;
