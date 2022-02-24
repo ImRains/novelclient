@@ -160,11 +160,12 @@ export default {
             flex-direction: column;
             justify-content: space-between;
             .noverTitle{
-                font-size: 18px;
+                font-size: 20px;
                 font-weight: bold;
                 color:#fff;
             }
             p{
+                font-size: 16px;
                 color:#fff;
             }
         }    
@@ -188,8 +189,8 @@ export default {
         margin: 12px 10px;
         background: #fff;
         padding: 14px 20px;
-        font-size: 14px;
-        line-height: 22px;
+        font-size: 16px;
+        line-height: 26px;
         color: #555;
         border-radius: 3px;
         box-shadow:  1px 2px 7px 0px #edeef1;
@@ -198,13 +199,17 @@ export default {
             color: #333;
         }
         .big{
-            font-size: 18px;
+            font-size: 20px;
         }
         .chapterList{
             li{
-                font-size: 14px;
-                height: 26px;
-                line-height: 26px;
+                font-size: 16px;
+                height: 30px;
+                line-height: 30px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                padding: 0 6px;
             }
         }
         .allChapter{

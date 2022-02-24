@@ -59,7 +59,7 @@ export default {
 <style lang="scss" scoped>
 .novelcontainer {
   display: flex;
-  padding: 12px;
+  padding: 14px 8px;
   border-bottom: 1px solid #f1f1f1;
   .novelImg {
     flex: 1;
@@ -78,18 +78,18 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     .title {
-      font-size: 16px;
+      font-size: 18px;
       color: rgba(51, 51, 51, 1);
       font-weight: bold;
     }
     .desc {
       margin-top: 0px;
-      font-size: 13px;
+      font-size: 14px;
       color: rgba(154, 155, 157, 1);
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
-      -webkit-line-clamp: 3;
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
     }
   }

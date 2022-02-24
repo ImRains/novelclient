@@ -144,7 +144,7 @@ export default {
                     duration:0
                 })
                 let chapterindex = event.target.getAttribute('data-chapterindex')
-                chapternow.chapterindex = chapterindex
+                chapternow.chapterindex = Number(chapterindex)
                 this.getChapterInfo(chapternow.bookid,chapternow.chapterindex)
                 document.body.scrollTop = document.documentElement.scrollTop = 0
             },
@@ -223,26 +223,28 @@ export default {
         padding: 0 20px 20px 20px;
         margin-top: 160px;
         li{
-            line-height: 26px;
+            line-height: 30px;
             color: #4F5D50;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            height: 30px;
+            font-size: 16px;
         }
     }
     .chapterContent{
         padding: 16px;
         background: #e1e5e4;
         .chapterContentTitle{
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
             text-align: center;
             line-height: 30px;
             padding: 10px 10px 0 10px;
         }
         .chapterContentInfo{
-            font-size: 16px;
-            line-height: 28px;
+            font-size: 20px;
+            line-height: 36px;
         }
     }
     .chapterContentTabbar{
