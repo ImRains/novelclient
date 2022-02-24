@@ -32,10 +32,10 @@
     </div>
     <div class="chapterContentTabbar">
         <div class="chapterContentTabbarButton" @click="goPreChapter">
-            <nut-button type="primary" block size="small">上一章</nut-button>
+            <nut-button type="primary" block size="normal">上一章</nut-button>
         </div>
         <div class="chapterContentTabbarButton" @click="goNextChapter">
-            <nut-button type="primary" block size="small">下一章</nut-button>
+            <nut-button type="primary" block size="normal">下一章</nut-button>
         </div>
     </div>
 </template>
@@ -246,7 +246,7 @@ export default {
         }
     }
     .chapterContentTabbar{
-        height: 41px;
+        height: 60px;
         background: #e1e5e4;
         position:fixed;
         bottom:0;
@@ -257,7 +257,7 @@ export default {
         box-sizing: border-box;
         .chapterContentTabbarButton{
             width:140px;
-            padding: 6px 0;
+            padding: 11px 0;
         }
     }
 </style>
