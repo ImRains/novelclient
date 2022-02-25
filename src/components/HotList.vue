@@ -73,7 +73,6 @@ export default {
   .right-content {
     flex: 2.5;
     margin-left: 25px;
-    font-family: PingFangSC;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
