@@ -13,7 +13,10 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     // 对请求头的操作
-
+    // 增添 token
+    if(localStorage.token){
+      config.headers.Authorization = localStorage.token;
+    }
     return config
   },
   error => {

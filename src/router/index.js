@@ -4,6 +4,7 @@ const Find = () => import('../views/Find.vue')
 const My = () => import('../views/My.vue')
 const NovelInfo = () => import('../views/NovelInfo.vue')
 const Chapter = () => import('../views/Chapter.vue')
+const Login = () => import('../views/Login.vue')
 
 const routes = [
   {
@@ -30,7 +31,12 @@ const routes = [
     path: '/chapter/:bookid/:chapterindex',
     name: 'Chapter',
     component: Chapter
-  }
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
 ]
 
 const router = createRouter({
