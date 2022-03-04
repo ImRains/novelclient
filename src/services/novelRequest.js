@@ -11,6 +11,13 @@ const novelRequest = {
             params,
             method: 'get'
         })
+    },
+    post: async function(url, data){
+        return request({
+            url,
+            data,
+            method:'post'
+        })
     }
 }
 

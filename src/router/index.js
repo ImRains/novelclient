@@ -5,6 +5,7 @@ const My = () => import('../views/My.vue')
 const NovelInfo = () => import('../views/NovelInfo.vue')
 const Chapter = () => import('../views/Chapter.vue')
 const Login = () => import('../views/Login.vue')
+const Signup = () => import('../views/Signup.vue')
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/signup',
+    name: 'Signup',
+    component: Signup
   },
 ]
 
