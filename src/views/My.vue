@@ -45,21 +45,8 @@ export default {
 
     onMounted(() => {
       const info = proxy.$store.state.user.userInfo;
-      console.log(store.state.user.userInfo)
       if (info) {
         user.info = info;
-      } else {
-        proxy.$novelrequest.get("/api/user/getUserInfo").then(
-          (res) => {
-            if (res.status == 200 && res.data.errno == 0) {
-              user.info = res.data.data;
-            }
-            // 存入info
-            proxy.$store.dispatch('user/setUserInfo',res.data.data)
-            console.log(proxy.$store)
-          },
-          (rej) => {}
-        );
       }
     });
 

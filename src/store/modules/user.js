@@ -3,13 +3,15 @@
  */
 
 const state = (() => {
-    userInfo: {}
+    return {
+        userInfo: JSON.parse(sessionStorage.getItem("USER_INFO")) ||{}
+    }
 })
 
 const mutations = {
     setUserInfo(state,info){
         state.userInfo = info
-        //sessionStorage.setItem("USER_INFO", JSON.stringify(info))
+        sessionStorage.setItem("USER_INFO", JSON.stringify(info))
     }
 }
 

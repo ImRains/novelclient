@@ -62,7 +62,7 @@ export default {
                     userName: user.username,
                     password: user.password
                 }).then(res => {
-                    proxy.$store.dispatch('setUserInfo',res.data.data.userInfo)
+                    proxy.$store.dispatch('user/setUserInfo',res.data.data.userInfo)
                     let url = router.currentRoute.value.query.backUrl
                                 ? decodeURIComponent(router.currentRoute.value.query.backUrl)
                                 : '/'
