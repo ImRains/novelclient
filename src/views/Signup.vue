@@ -58,8 +58,14 @@ export default {
                 router.go(-1)
             },
             goToLogin(){
+                let query = {}
+                let _q = router.currentRoute.value.query
+                if( _q && _q.backUrl){
+                    query.backUrl = _q.backUrl
+                }
                 router.push({
                     path: `/login`,
+                    query
                 });
             },
             signup(){

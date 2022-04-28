@@ -156,7 +156,9 @@ export default {
 };
 </script>
 
+
 <style scoped lang="scss">
+@import '../assets/css/public.scss';
 .novelInfoNavbar {
   background: linear-gradient(90deg, #4f5d50 0%, #687b69);
   height: 50px;
@@ -165,12 +167,6 @@ export default {
   font-weight: bold;
   margin-bottom: 0px;
   box-shadow: none;
-}
-.fixedTop {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 9;
 }
 .novelMsg {
   height: 160px;
@@ -210,37 +206,20 @@ export default {
     }
   }
 }
-.novelCell {
-  margin: 12px 10px;
-  background: #fff;
-  padding: 14px 20px;
-  font-size: 16px;
-  line-height: 26px;
-  color: #555;
-  border-radius: 3px;
-  box-shadow: 1px 2px 7px 0px #edeef1;
-  .blod {
-    font-weight: bolder;
-    color: #333;
+.chapterList {
+  li {
+    font-size: 16px;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 6px;
   }
-  .big {
-    font-size: 20px;
-  }
-  .chapterList {
-    li {
-      font-size: 16px;
-      height: 30px;
-      line-height: 30px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      padding: 0 6px;
-    }
-  }
-  .allChapter {
-    display: flex;
-    justify-content: space-between;
-  }
+}
+.allChapter {
+  display: flex;
+  justify-content: space-between;
 }
 
 .novelInfoBottom {

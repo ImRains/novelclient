@@ -14,8 +14,9 @@ service.interceptors.request.use(
   config => {
     // 对请求头的操作
     // 增添 token
-    if(localStorage.token){
-      config.headers.Authorization = localStorage.token;
+    let token = localStorage.getItem('Authorization_token')
+    if(token){
+      config.headers.Authorization = token;
     }
     return config
   },
@@ -29,12 +30,15 @@ service.interceptors.request.use(
 // response interceptor
 service.interceptors.response.use(
   async response => {
-    if (response.data.code === 10000 || response.data.code === '10000') {
+    if (response.data.errno === 0 || response.data.code === '0') {
       //return Promise.reject(new Error(response.data.message || 'Error'))
-   
+      if(response.data.data.token){
+        // 存入 token
+        localStorage.setItem('Authorization_token',response.data.data.token)
+      }
+      return response
     } else {
 
-      return response
     }
   },
   error => {

@@ -1,7 +1,6 @@
 <template>
     <nut-navbar
       :left-show="true"
-      @on-click-send="showChapter"
       title="登录"
       class="novelInfoNavbar fixedTop"
     >
@@ -10,17 +9,17 @@
         <div class="inputContainer">
             <div class="inputItem">
                 <!-- <p>账号 :</p> -->
-                <input type="text" placeholder="Account">
+                <input type="text" placeholder="Account" v-model="username">
             </div>
             <div class="inputItem">
                 <!-- <p>密码 :</p> -->
-                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Password" v-model="password">
             </div>
             <div class="toSignup">
                 没有账号?去
                 <span @click="goToSignup">注册</span>
             </div>
-            <div class="inputButton">
+            <div class="inputButton" @click="login">
                 登&nbsp;&nbsp;&nbsp;&nbsp;录
             </div>
         </div>
@@ -28,12 +27,17 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, getCurrentInstance, reactive, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
 export default {
     setup() {
         const router = useRouter()
         const bodyHeight = ref(400)
+        const { proxy } = getCurrentInstance()
+        const user = reactive({
+            username:'',
+            password:''
+        })
         onMounted(() => {
             bodyHeight.value = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
         })
@@ -42,14 +46,38 @@ export default {
                 router.go(-1)
             },
             goToSignup(){
+                let query = {}
+                let _q = router.currentRoute.value.query
+                if( _q && _q.backUrl){
+                    query.backUrl = _q.backUrl
+                }
                 router.push({
                     path: `/signup`,
+                    query
                 });
+            },
+            login(){
+                proxy.$novelrequest
+                .post('/api/user/login',{
+                    userName: user.username,
+                    password: user.password
+                }).then(res => {
+                    proxy.$store.dispatch('setUserInfo',res.data.data.userInfo)
+                    let url = router.currentRoute.value.query.backUrl
+                                ? decodeURIComponent(router.currentRoute.value.query.backUrl)
+                                : '/'
+                    router.push({
+                        path:url
+                    })
+                },rej => {
+
+                })
             }
         }
         return {
             bodyHeight,
-            ...methods
+            ...methods,
+            ...toRefs(user)
         }
     },
 }
