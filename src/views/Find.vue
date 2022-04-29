@@ -103,6 +103,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../assets/css/public.scss';
 .fixedTop {
   position: fixed;
   top: 0;
@@ -110,14 +111,6 @@ export default {
   z-index: 9;
 }
 .novelCell {
-  margin: 12px 10px;
-  background: #fff;
-  padding: 14px 20px;
-  font-size: 14px;
-  line-height: 22px;
-  color: #555;
-  border-radius: 3px;
-  box-shadow: 1px 2px 7px 0px #edeef1;
   p {
     font-size: 18px;
     font-weight: bold;

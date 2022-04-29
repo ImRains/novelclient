@@ -6,7 +6,9 @@
         <nut-icon name="search" color="#fff"></nut-icon>
       </div>
     </div>
-    <div>书架列表</div>
+    <div class="novelCell">
+      <p>书架列表</p>
+    </div>
     <tabbar :active="0"></tabbar>
   </div>
 </template>
@@ -36,4 +38,10 @@ export default {
 
 <style scoped lang="scss">
 @import '../assets/css/public.scss';
+.novelCell{
+  p {
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
 </style>

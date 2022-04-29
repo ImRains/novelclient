@@ -4,25 +4,25 @@
       :left-show="true"
       @on-click-send="setMore"
       @on-click-back="goBack"
-      :title="noverInfo.title"
+      :title="novelInfo.title"
       icon="more-x"
       class="novelInfoNavbar fixedTop"
     >
     </nut-navbar>
     <div class="novelMsg">
       <div class="msgLeft">
-        <div class="noverTitle">{{ noverInfo.title }}</div>
-        <p>{{ noverInfo.author }}</p>
+        <div class="novelTitle">{{ novelInfo.title }}</div>
+        <p>{{ novelInfo.author }}</p>
       </div>
       <div class="msgRight">
         <div>
-          <img :src="noverInfo.cover" alt="" />
+          <img :src="novelInfo.cover" alt="" />
         </div>
       </div>
     </div>
     <div class="novelCell">
       <span class="blod big">简介：</span>
-      {{ noverInfo.desc }}
+      {{ novelInfo.desc }}
     </div>
     <div class="novelCell">
       <p class="blod big">最新章节</p>
@@ -58,11 +58,11 @@
       </ul>
     </div>
     <div class="novelInfoBottom">
-      <div class="addFollow">
+      <div class="addFollow" @click="collect">
         <p>
-          <nut-icon name="addfollow" size="18"></nut-icon>
+          <nut-icon :name="isCollect" size="18"></nut-icon>
         </p>
-        加入书架
+        {{ isCollect == 'star-n' ? '未收藏' : '已收藏' }}
       </div>
       <div class="novelRead">
         <div @click="toReadNovel">
@@ -92,7 +92,7 @@ export default {
       methods.showLoad();
       methods.getNoverInfo();
     });
-    let noverInfo = reactive({
+    let novelInfo = reactive({
       title: "",
       rows: [],
     });
@@ -100,6 +100,7 @@ export default {
       last: [],
       all: [],
     });
+    let isCollect = ref('star-n')
     const methods = {
       showLoad() {
         Toast.loading("正在读取书籍信息, 如果加载失败请刷新页面", {
@@ -108,6 +109,7 @@ export default {
       },
       getNoverInfo() {
         let { title, source, sourceUrl } = router.currentRoute.value.query;
+        let self = this
         proxy.$novelrequest
           .get("/api/novels/getNovelInfo", {
             title,
@@ -116,13 +118,14 @@ export default {
           })
           .then((res) => {
             if (res.status == 200 && res.data.errno == 0) {
-              noverInfo = Object.assign(noverInfo, res.data.data.info);
+              novelInfo = Object.assign(novelInfo, res.data.data.info);
               let chapter = res.data.data.chapters;
               chapterData.last = JSON.parse(JSON.stringify(chapter.rows))
                 .reverse()
                 .slice(0, 5);
               chapterData.all = chapter;
               Toast.hide();
+              self.loadCollection();
             }
           });
       },
@@ -137,19 +140,53 @@ export default {
       },
       toReadNovel() {
         router.push({
-          path: `/chapter/${noverInfo.id}/0`,
+          path: `/chapter/${novelInfo.id}/0`,
         });
       },
       goTargetChapter(event) {
         let index = event.target.getAttribute("data-chapterindex");
         router.push({
-          path: `/chapter/${noverInfo.id}/${index}`,
+          path: `/chapter/${novelInfo.id}/${index}`,
         });
       },
+      collect(){
+        // 收藏书籍
+        if(isCollect.value == 'star-n'){
+          // 此时为未收藏，调用收藏接口
+          proxy.$novelrequest.post('/api/user/addNoverToFollow',{
+            novelId:novelInfo.id
+          }).then(res=>{
+            if(res.status == 200 && res.data.errno == 0){
+              isCollect.value = isCollect.value == 'star-n' ? 'star-fill-n' : 'star-n'
+            }
+          })
+        }else{
+          // 调用取消收藏接口
+          proxy.$novelrequest.post('/api/user/deleteNovelToFollow',{
+            novelId:novelInfo.id
+          }).then(res=>{
+            if(res.status == 200 && res.data.errno == 0){
+              isCollect.value = isCollect.value == 'star-n' ? 'star-fill-n' : 'star-n'
+            }
+          })
+        }
+        
+      },
+      //加载该小说收藏关系
+      loadCollection(){
+        proxy.$novelrequest.get('/api/user/isCollect',{
+          novelId:novelInfo.id
+        }).then(res=>{
+          if(res.status == 200 && res.data.errno == 0){
+            isCollect.value = res.data.data.isCollect ? 'star-fill-n' : 'star-n'
+          }
+        })
+      }
     };
     return {
       chapterData,
-      noverInfo,
+      novelInfo,
+      isCollect,
       ...methods,
     };
   },
@@ -180,7 +217,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    .noverTitle {
+    .novelTitle {
       font-size: 20px;
       font-weight: bold;
       color: #fff;

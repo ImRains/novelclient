@@ -16,9 +16,9 @@
         </div>
       </div>
       <nut-cell-group style="margin:10px">
-        <nut-cell title="消息通知" to="/"></nut-cell>
+        <nut-cell title="消息通知" @click="noFound"></nut-cell>
         <nut-cell title="我的书架" to="/addfollow"></nut-cell>
-        <nut-cell title="我的好友" to="/"></nut-cell>
+        <nut-cell title="我的好友" @click="noFound"></nut-cell>
         <nut-cell title="修改资料" to="/setting"></nut-cell>
         <nut-cell title="退出登录" to="/logout"></nut-cell>
       </nut-cell-group>
@@ -31,6 +31,7 @@
 import { ref, toRefs, reactive, getCurrentInstance, onMounted, watch } from "vue";
 import { useStore } from 'vuex'
 import Tabbar from "../components/Tabbar.vue";
+import { Toast } from "@nutui/nutui";
 export default {
   setup() {
     const tabValue = ref(0);
@@ -52,11 +53,17 @@ export default {
 
     const methods = {
       setting() {
-        alert("设置");
+        //alert("设置");
+        proxy.$router.push({
+          path:'setting'
+        })
       },
       changeTab(tab) {
         tabValue.value = tab.paneKey;
       },
+      noFound(){
+        Toast.warn('功能暂未开放 ~')
+      }
     };
     return {
       tabValue,
