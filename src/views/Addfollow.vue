@@ -8,30 +8,51 @@
     </div>
     <div class="novelCell">
       <p>书架列表</p>
+      <novel-list :novelList="list"></novel-list>
     </div>
     <tabbar :active="0"></tabbar>
   </div>
 </template>
 
 <script>
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted, getCurrentInstance, toRefs } from "vue";
 import Tabbar from "../components/Tabbar.vue";
+import NovelList from "../components/novelList.vue"
 export default {
   setup() {
+    const { proxy } = getCurrentInstance()
+
+    const novel = reactive({
+      list:[]
+    })
+
     const methods = {
-      searchBook() {
-        alert("搜索书籍");
-      },
       changeTab(tab) {
         tabValue.value = tab.paneKey;
       },
+      getCollectionList(){
+        proxy.$novelrequest.get('/api/user/getNovelFollowList').then(res=>{
+          if(res.status == 200 && res.data.errno == 0){
+            novel.list = res.data.data.novelList
+          }
+          console.log(novel.list)
+        })
+      }
     };
+
+    onMounted(() => {
+      // 获取用户收藏列表
+      methods.getCollectionList()
+    })
+
     return {
       ...methods,
+      ...toRefs(novel)
     };
   },
   components: {
     Tabbar,
+    NovelList
   },
 };
 </script>
