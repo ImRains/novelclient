@@ -18,6 +18,13 @@ const novelRequest = {
             data,
             method:'post'
         })
+    },
+    patch: async function(url, data){
+        return request({
+            url,
+            data,
+            method:'patch'
+        })
     }
 }
 
