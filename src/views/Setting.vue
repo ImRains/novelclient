@@ -23,6 +23,7 @@
 import { reactive, ref, toRefs, onMounted, getCurrentInstance } from 'vue';
 import { useRouter, } from 'vue-router'
 import { useStore } from 'vuex'
+import { Toast } from '@nutui/nutui';
 export default {
   setup() {
       const router = useRouter()
@@ -78,12 +79,21 @@ export default {
             if(nickName)option.nickName = nickName
             if(picture)option.picture = picture
             if(city)option.city = city
-            console.log(option)
             proxy.$novelrequest.patch('/api/user/changeInfo',option).then(res=>{
-              console.log(res)
               // vuex 存储返回用户信息
               if(res.status == 200 && res.data.errno ==0){
                 store.commit('user/setUserInfo',res.data.data.userInfo)
+                Toast.success('修改信息成功 ~')
+                user.info = {
+                  nickName:user.newInfo.nickName ? user.newInfo.nickName : user.info.nickName,
+                  picture:user.newInfo.picture ? user.newInfo.picture : user.info.picture,
+                  city:user.newInfo.city ? user.newInfo.city : user.info.city
+                }
+                user.newInfo = {
+                  nickName:'',
+                  picture:'',
+                  city:''
+                }
               }
             },rej=>{})
           },

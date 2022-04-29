@@ -91,7 +91,7 @@ router.beforeEach((to,from,next) => {
     let token = localStorage.getItem('Authorization_token');
     // 判断 vuex 数据
     let info = vuex.state.user.userInfo
-    if(!info.userName){
+    if(!info.userName || to.path === '/my'){
       request.get("/api/user/getUserInfo").then(
         (res) => {
           if (res.status == 200 && res.data.errno == 0) {
