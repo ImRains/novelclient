@@ -100,7 +100,7 @@ export default {
     });
     const methods = {
       showLoad() {
-        Toast.loading("正在加载章节信息, 请稍后", {
+        Toast.loading("正在加载章节信息, 请稍后~", {
           duration: 0,
         });
       },
